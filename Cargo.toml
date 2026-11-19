@@ -1,0 +1,27 @@
+[package]
+name = "zk-graph"
+version = "0.3.2"
+edition = "2021"
+rust-version = "1.95"
+description = "Live, GPU-rendered graph view for zk notebooks, driven by Neovim"
+license = "MIT"
+
+[dependencies]
+eframe = { version = "0.36", default-features = false, features = ["default_fonts", "glow", "wgpu", "wayland", "x11"] }
+notify = { version = "8", default-features = false }
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+log = { version = "0.4", features = ["std"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+strip = true
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
